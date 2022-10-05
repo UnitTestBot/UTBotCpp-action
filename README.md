@@ -41,11 +41,11 @@ jobs:
     permissions: write-all
     steps:
     - name: UTBot code analysis
-      uses: UnitTestBot/UTBotCpp-action@test-1.0.25
+      uses: UnitTestBot/UTBotCpp-action@test-1.0.26
       with:
         add_tests: 'true'
         refresh_tests: 'true'
-        utbot_version: '2022.7.3'
+        utbot_version: '2022.10.3'
         scope: 'project'
 # for individual file:
 #       scope: 'file'

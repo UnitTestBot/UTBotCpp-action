@@ -76,34 +76,34 @@ runs:
           ls
       shell: sh
       
-    - name: Create Pull Request with tests and codeAnalysis information
+    - name: Create Pull Request with tests and utbot_report information
       uses: peter-evans/create-pull-request@v4
       if: ${{ inputs.add_tests == 'true' }}
       with:
         add-paths: |
             tests/
-            codeAnalysis/
-        commit-message: UTBot code analysis add tests and codeAnalysis information
+            utbot_report/
+        commit-message: UTBot code analysis add tests and utbot_report information
         branch-suffix: short-commit-hash
         branch: utbote-code-analysis
         title: UTBot code analysis
-        body: UTBot code analysis add tests and codeAnalysis information
+        body: UTBot code analysis add tests and utbot_report information
         delete-branch: true
         
-    - name: Create Pull Request with tests and codeAnalysis information
+    - name: Create Pull Request with tests and utbot_report information
       uses: peter-evans/create-pull-request@v4
       if: ${{ inputs.add_tests != 'true' }}
       with:
         add-paths: |
-            codeAnalysis/
-        commit-message: UTBot code analysis add tests and codeAnalysis information
+            utbot_report/
+        commit-message: UTBot code analysis add tests and utbot_report information
         branch-suffix: short-commit-hash
         branch: utbote-code-analysis
         title: UTBot code analysis
-        body: UTBot code analysis add tests and codeAnalysis information
+        body: UTBot code analysis add tests and utbot_report information
         delete-branch: true
         
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: codeAnalysis/project_code_analysis.sarif
+        sarif_file: utbot_report/project_code_analysis.sarif

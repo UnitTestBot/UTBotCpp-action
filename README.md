@@ -17,6 +17,7 @@ add_tests, refresh_tests, tests_scope, scope_path
 | `add_tests` | 'true' / 'false' | Add tests to pull request  | `Yes` |
 | `refresh_tests` | 'true' / 'false' | Delete old tests in pull request | `Yes` |
 | `utbot_version` | xxxx.xx[.xx] | UTBot version to run  | `Yes` |
+| `runtests` | 'true' / 'false' | Run generated tests | `Yes` |
 | `scope` |  `project` / `directory` / `file` | Testing scope | `Yes` |
 | `path` | Realtive path string | `directory` or `file` path | `No` for the `project`, `Yes` for the rest |
 
@@ -41,11 +42,12 @@ jobs:
     permissions: write-all
     steps:
     - name: UTBot code analysis
-      uses: UnitTestBot/UTBotCpp-action@test-1.0.26
+      uses: UnitTestBot/UTBotCpp-action@test-1.0.27
       with:
         add_tests: 'true'
         refresh_tests: 'true'
-        utbot_version: '2022.10.3'
+        utbot_version: '2022.10.4'
+        runtests: 'true'
         scope: 'project'
 # for individual file:
 #       scope: 'file'

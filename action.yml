@@ -18,6 +18,9 @@ on:
     scope:
       description: 'Run utbot to all project, directory or file'
       required: true
+    runtests:
+      description: 'Run generated tests'
+      required: false
     path:
       description: 'directory or file name'
       required: true
@@ -53,6 +56,12 @@ runs:
           RUN_SYSTEM_SCRIPT_PATH=$CURRENT_FOLDER/utbot_run_system.sh
           UTBOT_CLI_OPTIONS="generate --project-path ../.. project"
           $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_OPTIONS
+          RUN_TESTS="${{ inputs.runtests }}"
+          if [ $RUN_TESTS = 'true' ]
+          then
+            UTBOT_CLI_RUN_OPTIONS="run --project-path ../.. project"
+            $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_RUN_OPTIONS
+          fi
       shell: sh
       
     - name: Testing file
@@ -63,6 +72,12 @@ runs:
           RUN_SYSTEM_SCRIPT_PATH=$CURRENT_FOLDER/utbot_run_system.sh
           UTBOT_CLI_OPTIONS="generate --project-path ../.. file --file-path ../../${{ inputs.path }}"
           $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_OPTIONS
+          RUN_TESTS="${{ inputs.runtests }}"
+          if [ $RUN_TESTS = 'true' ]
+          then
+            UTBOT_CLI_RUN_OPTIONS="run --project-path ../.. file --file-path ../../${{ inputs.path }}"
+            $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_RUN_OPTIONS
+          fi
       shell: sh
       
     - name: Testing directory
@@ -73,6 +88,12 @@ runs:
           RUN_SYSTEM_SCRIPT_PATH=$CURRENT_FOLDER/utbot_run_system.sh
           UTBOT_CLI_OPTIONS="generate --project-path ../../${{ inputs.path }} folder --folder-path ../../${{ inputs.path }}"
           $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_OPTIONS
+          RUN_TESTS="${{ inputs.runtests }}"
+          if [ $RUN_TESTS = 'true' ]
+          then
+            UTBOT_CLI_RUN_OPTIONS="run --project-path ../../${{ inputs.path }} folder --folder-path ../../${{ inputs.path }}"
+            $RUN_SYSTEM_SCRIPT_PATH "cli" $UTBOT_CLI_RUN_OPTIONS
+          fi
           ls
       shell: sh
       
